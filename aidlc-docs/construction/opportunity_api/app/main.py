@@ -4,12 +4,14 @@ Main FastAPI application entry point.
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 import logging
 import uuid
+import os
 from datetime import datetime
 
 from app.api.v1.router import api_router
@@ -91,6 +93,22 @@ async def add_request_id_middleware(request: Request, call_next):
 # Include API router
 app.include_router(api_router, prefix="/api/v1")
 
+# Mount static files for web interface
+web_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "web")
+if os.path.exists(web_dir):
+    app.mount("/static", StaticFiles(directory=web_dir), name="static")
+    logger.info(f"Mounted static files from: {web_dir}")
+
+# Web interface route
+@app.get("/web")
+async def web_interface():
+    """Serve the web interface."""
+    web_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "web", "index.html")
+    if os.path.exists(web_file):
+        return FileResponse(web_file)
+    else:
+        return {"message": "Web interface not found", "path": web_file}
+
 # Root endpoint
 @app.get("/")
 async def root():
@@ -99,6 +117,7 @@ async def root():
         "message": "Welcome to Opportunity Management Service API",
         "version": "1.0.0",
         "documentation": "/api/v1/docs",
+        "web_interface": "/web",
         "health": "/health",
         "openapi": "/api/v1/openapi.json"
     }
