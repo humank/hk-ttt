@@ -28,7 +28,7 @@ Your Role: You are an experienced software architect. You are tasked with creati
 
 Plan for the work ahead and write your steps in the aidlc-docs/inception/units/dependencies_integration_summary.md file with checkboxes for each step in the plan. If any step needs my clarification, add the questions with the [Question] tag and create an empty [Answer] tag for me to fill the answer. Do not make any assumptions or decisions on your own. Upon creating the plan, ask for my review and approval. After my approval, you can go ahead to execute the same plan one step at a time. Once you finish each step, mark the checkboxes as completed in the plan.
 
-Your Task: Refer to the Shared Data Models section in aidlc-docs/inception/dependencies_integration_summary.md folder. Create the component model for each of the core entities with their attributes. Refer to aidlc-docs/inception/comprehensive_user_stories.md for additional context. Save the output in aidlc-docs/nception/units/shared_model.md
+Your Task: Refer to the Shared Data Models section in aidlc-docs/inception/dependencies_integration_summary.md folder. Create the component model for each of the core entities with their attributes. Refer to aidlc-docs/inception/comprehensive_user_stories.md for additional context. Save the output in aidlc-docs/inception/units/shared_model.md
 
 
 
