@@ -1,0 +1,952 @@
+openapi: 3.0.3
+info:
+  title: Opportunity Management Service API
+  description: RESTful API for managing opportunities, problem statements, skill requirements, timeline requirements, and attachments
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development server
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      operationId: health_check
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /opportunities:
+    post:
+      summary: Create a new opportunity
+      operationId: create_opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityCreateRequest'
+      responses:
+        '201':
+          description: Opportunity created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    get:
+      summary: Search opportunities
+      operationId: search_opportunities
+      parameters:
+        - name: query
+          in: query
+          description: Search query for title or description
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by opportunity status
+          schema:
+            type: string
+            enum: [DRAFT, SUBMITTED, CANCELLED, COMPLETED]
+        - name: priority
+          in: query
+          description: Filter by priority
+          schema:
+            type: string
+            enum: [LOW, MEDIUM, HIGH, CRITICAL]
+        - name: sales_manager_id
+          in: query
+          description: Filter by sales manager ID
+          schema:
+            type: string
+            format: uuid
+        - name: customer_id
+          in: query
+          description: Filter by customer ID
+          schema:
+            type: string
+            format: uuid
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: page_size
+          in: query
+          description: Number of items per page
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: Opportunities retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}:
+    get:
+      summary: Get opportunity details
+      operationId: get_opportunity_details
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Opportunity details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityDetailsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/submit:
+    post:
+      summary: Submit an opportunity for matching
+      operationId: submit_opportunity
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunitySubmitRequest'
+      responses:
+        '200':
+          description: Opportunity submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/cancel:
+    post:
+      summary: Cancel an opportunity
+      operationId: cancel_opportunity
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityCancelRequest'
+      responses:
+        '200':
+          description: Opportunity cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/reactivate:
+    post:
+      summary: Reactivate a cancelled opportunity
+      operationId: reactivate_opportunity
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityReactivateRequest'
+      responses:
+        '200':
+          description: Opportunity reactivated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/problem-statement:
+    post:
+      summary: Add a problem statement to an opportunity
+      operationId: add_problem_statement
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProblemStatementCreateRequest'
+      responses:
+        '201':
+          description: Problem statement added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/skill-requirements:
+    post:
+      summary: Add a skill requirement to an opportunity
+      operationId: add_skill_requirement
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillRequirementCreateRequest'
+      responses:
+        '201':
+          description: Skill requirement added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /opportunities/{opportunity_id}/timeline-requirement:
+    post:
+      summary: Add a timeline requirement to an opportunity
+      operationId: add_timeline_requirement
+      parameters:
+        - name: opportunity_id
+          in: path
+          required: true
+          description: Opportunity ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimelineRequirementCreateRequest'
+      responses:
+        '201':
+          description: Timeline requirement added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /problem-statements/{problem_statement_id}/attachments:
+    post:
+      summary: Add an attachment to a problem statement
+      operationId: add_attachment
+      parameters:
+        - name: problem_statement_id
+          in: path
+          required: true
+          description: Problem statement ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AttachmentCreateRequest'
+      responses:
+        '201':
+          description: Attachment added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '413':
+          description: File too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    get:
+      summary: Get attachments for a problem statement
+      operationId: get_attachments_for_problem_statement
+      parameters:
+        - name: problem_statement_id
+          in: path
+          required: true
+          description: Problem statement ID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Attachments retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /attachments/{attachment_id}:
+    delete:
+      summary: Remove an attachment
+      operationId: remove_attachment
+      parameters:
+        - name: attachment_id
+          in: path
+          required: true
+          description: Attachment ID
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachmentRemoveRequest'
+      responses:
+        '200':
+          description: Attachment removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /attachments/{attachment_id}/download:
+    get:
+      summary: Download an attachment file
+      operationId: download_attachment
+      parameters:
+        - name: attachment_id
+          in: path
+          required: true
+          description: Attachment ID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: File download
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "healthy"
+        timestamp:
+          type: string
+          format: date-time
+        version:
+          type: string
+          example: "1.0.0"
+
+    StandardResponse:
+      type: object
+      properties:
+        data:
+          type: object
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
+
+    ResponseMeta:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        request_id:
+          type: string
+          format: uuid
+
+    PaginationInfo:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_items:
+          type: integer
+        total_pages:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              enum: [VALIDATION_ERROR, RESOURCE_NOT_FOUND, OPERATION_NOT_ALLOWED, INTERNAL_ERROR]
+            message:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                  message:
+                    type: string
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+
+    OpportunityCreateRequest:
+      type: object
+      required:
+        - title
+        - customer_id
+        - customer_name
+        - sales_manager_id
+        - description
+        - priority
+        - annual_recurring_revenue
+        - geographic_requirements
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        customer_id:
+          type: string
+          format: uuid
+        customer_name:
+          type: string
+          maxLength: 100
+        sales_manager_id:
+          type: string
+          format: uuid
+        description:
+          type: string
+          maxLength: 2000
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+        annual_recurring_revenue:
+          type: number
+          minimum: 0
+        geographic_requirements:
+          $ref: '#/components/schemas/GeographicRequirements'
+
+    GeographicRequirements:
+      type: object
+      required:
+        - region_id
+        - name
+        - requires_physical_presence
+        - allows_remote_work
+      properties:
+        region_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        requires_physical_presence:
+          type: boolean
+        allows_remote_work:
+          type: boolean
+
+    OpportunityResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        customer_id:
+          type: string
+          format: uuid
+        customer_name:
+          type: string
+        sales_manager_id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+        annual_recurring_revenue:
+          type: number
+        geographic_requirements:
+          $ref: '#/components/schemas/GeographicRequirements'
+        status:
+          type: string
+          enum: [DRAFT, SUBMITTED, CANCELLED, COMPLETED]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        cancelled_at:
+          type: string
+          format: date-time
+          nullable: true
+        cancellation_reason:
+          type: string
+          nullable: true
+        reactivation_deadline:
+          type: string
+          format: date-time
+          nullable: true
+
+    OpportunityListResponse:
+      allOf:
+        - $ref: '#/components/schemas/StandardResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                opportunities:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpportunityResponse'
+
+    OpportunityDetailsResponse:
+      allOf:
+        - $ref: '#/components/schemas/StandardResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                opportunity:
+                  $ref: '#/components/schemas/OpportunityResponse'
+                problem_statement:
+                  $ref: '#/components/schemas/ProblemStatementResponse'
+                skill_requirements:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SkillRequirementResponse'
+                timeline:
+                  $ref: '#/components/schemas/TimelineRequirementResponse'
+                status_history:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpportunityStatusResponse'
+                change_history:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChangeRecordResponse'
+                attachments:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AttachmentResponse'
+
+    OpportunitySubmitRequest:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          format: uuid
+
+    OpportunityCancelRequest:
+      type: object
+      required:
+        - user_id
+        - reason
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+          maxLength: 500
+
+    OpportunityReactivateRequest:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          format: uuid
+
+    ProblemStatementCreateRequest:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          minLength: 100
+          maxLength: 5000
+
+    ProblemStatementResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        opportunity_id:
+          type: string
+          format: uuid
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    SkillRequirementCreateRequest:
+      type: object
+      required:
+        - skill_id
+        - skill_type
+        - importance_level
+        - minimum_proficiency_level
+      properties:
+        skill_id:
+          type: string
+          format: uuid
+        skill_type:
+          type: string
+          enum: [TECHNICAL, SOFT, DOMAIN]
+        importance_level:
+          type: string
+          enum: [MUST_HAVE, NICE_TO_HAVE, PREFERRED]
+        minimum_proficiency_level:
+          type: string
+          enum: [BEGINNER, INTERMEDIATE, ADVANCED, EXPERT]
+
+    SkillRequirementResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        opportunity_id:
+          type: string
+          format: uuid
+        skill_id:
+          type: string
+          format: uuid
+        skill_name:
+          type: string
+        skill_type:
+          type: string
+          enum: [TECHNICAL, SOFT, DOMAIN]
+        importance_level:
+          type: string
+          enum: [MUST_HAVE, NICE_TO_HAVE, PREFERRED]
+        minimum_proficiency_level:
+          type: string
+          enum: [BEGINNER, INTERMEDIATE, ADVANCED, EXPERT]
+        created_at:
+          type: string
+          format: date-time
+
+    TimelineRequirementCreateRequest:
+      type: object
+      required:
+        - start_date
+        - end_date
+        - is_flexible
+      properties:
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        is_flexible:
+          type: boolean
+        specific_days:
+          type: array
+          items:
+            type: string
+          nullable: true
+
+    TimelineRequirementResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        opportunity_id:
+          type: string
+          format: uuid
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        is_flexible:
+          type: boolean
+        specific_days:
+          type: array
+          items:
+            type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+
+    AttachmentCreateRequest:
+      type: object
+      required:
+        - file
+        - uploaded_by
+      properties:
+        file:
+          type: string
+          format: binary
+        uploaded_by:
+          type: string
+          format: uuid
+
+    AttachmentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        problem_statement_id:
+          type: string
+          format: uuid
+        file_name:
+          type: string
+        file_type:
+          type: string
+        file_size:
+          type: integer
+        file_url:
+          type: string
+        uploaded_by:
+          type: string
+          format: uuid
+        uploaded_at:
+          type: string
+          format: date-time
+        is_removed:
+          type: boolean
+
+    AttachmentListResponse:
+      allOf:
+        - $ref: '#/components/schemas/StandardResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                attachments:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AttachmentResponse'
+
+    AttachmentRemoveRequest:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          format: uuid
+
+    OpportunityStatusResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        opportunity_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [DRAFT, SUBMITTED, CANCELLED, COMPLETED]
+        changed_by:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        changed_at:
+          type: string
+          format: date-time
+
+    ChangeRecordResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        opportunity_id:
+          type: string
+          format: uuid
+        changed_by:
+          type: string
+          format: uuid
+        field_changed:
+          type: string
+        reason:
+          type: string
+        old_value:
+          type: string
+        new_value:
+          type: string
+        changed_at:
+          type: string
+          format: date-time
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    Forbidden:
+      description: Operation not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

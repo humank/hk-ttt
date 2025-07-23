@@ -1,0 +1,451 @@
+INFO:     Will watch for changes in these directories: ['/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [80186] using StatReload
+INFO:     Started server process [80188]
+INFO:     Waiting for application startup.
+2025-07-23 15:02:43,613 - app.main - INFO - Creating database tables...
+2025-07-23 15:02:43,616 - app.main - INFO - Database tables created successfully
+INFO:     Application startup complete.
+2025-07-23 15:03:09,832 - app.main - INFO - Request 4154583b-2bd0-4e53-a3c6-5cacd5b59fc7: GET / from 127.0.0.1
+2025-07-23 15:03:09,833 - app.main - INFO - Response 4154583b-2bd0-4e53-a3c6-5cacd5b59fc7: 200 processed in 0.001s
+INFO:     127.0.0.1:56980 - "GET / HTTP/1.1" 200 OK
+2025-07-23 15:03:33,819 - app.main - INFO - Request d6bafa25-83f6-48e4-ae37-7f559f20fd52: GET /health from 127.0.0.1
+2025-07-23 15:03:33,823 - app.main - INFO - Response d6bafa25-83f6-48e4-ae37-7f559f20fd52: 200 processed in 0.003s
+INFO:     127.0.0.1:57069 - "GET /health HTTP/1.1" 200 OK
+2025-07-23 15:03:35,687 - app.main - INFO - Request d2a22afc-1783-4202-85cb-30cbb46dc3ae: GET /api/v1 from 127.0.0.1
+2025-07-23 15:03:35,688 - app.main - INFO - Response d2a22afc-1783-4202-85cb-30cbb46dc3ae: 404 processed in 0.001s
+INFO:     127.0.0.1:57077 - "GET /api/v1 HTTP/1.1" 404 Not Found
+2025-07-23 15:03:44,973 - app.main - INFO - Request 42396b7c-90eb-4cf4-b13d-b98a82c65929: GET /health from 127.0.0.1
+2025-07-23 15:03:44,976 - app.main - INFO - Response 42396b7c-90eb-4cf4-b13d-b98a82c65929: 200 processed in 0.002s
+INFO:     127.0.0.1:57113 - "GET /health HTTP/1.1" 200 OK
+2025-07-23 15:03:49,791 - app.main - INFO - Request 28adaef3-ccac-4634-8d59-41a6d0dce04b: POST /api/v1/opportunities from 127.0.0.1
+2025-07-23 15:03:49,824 - app.main - ERROR - Unhandled exception 28adaef3-ccac-4634-8d59-41a6d0dce04b: (builtins.TypeError) Object of type UUID is not JSON serializable
+[SQL: INSERT INTO opportunities (id, title, customer_id, customer_name, sales_manager_id, description, priority, annual_recurring_revenue, geographic_requirements, status, created_at, updated_at, submitted_at, cancelled_at, cancellation_reason, reactivation_deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'description': 'This is a test opportunity to verify the API is working correctly after fixing the 404 error', 'status': 'DRAFT', 'annual_recurring_r ... (355 characters truncated) ... r_id': '123e4567-e89b-12d3-a456-426614174001', 'reactivation_deadline': None, 'cancellation_reason': None, 'cancelled_at': None, 'submitted_at': None}]]
+Traceback (most recent call last):
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1811, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1485, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/sqltypes.py", line 2792, in process
+    return json_serializer(value)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type UUID is not JSON serializable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 182, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_utils.py", line 83, in collapse_excgroups
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 184, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/main.py", line 76, in add_request_id_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 159, in call_next
+    raise app_exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/api/v1/endpoints/opportunities.py", line 36, in create_opportunity
+    opportunity = service.create_opportunity(
+        title=opportunity_data.title,
+    ...<6 lines>...
+        geographic_requirements=opportunity_data.geographic_requirements.dict()
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/services/opportunity_service_adapter.py", line 58, in create_opportunity
+    self.db.commit()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1817, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1811, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1485, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/sqltypes.py", line 2792, in process
+    return json_serializer(value)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+sqlalchemy.exc.StatementError: (builtins.TypeError) Object of type UUID is not JSON serializable
+[SQL: INSERT INTO opportunities (id, title, customer_id, customer_name, sales_manager_id, description, priority, annual_recurring_revenue, geographic_requirements, status, created_at, updated_at, submitted_at, cancelled_at, cancellation_reason, reactivation_deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'description': 'This is a test opportunity to verify the API is working correctly after fixing the 404 error', 'status': 'DRAFT', 'annual_recurring_r ... (355 characters truncated) ... r_id': '123e4567-e89b-12d3-a456-426614174001', 'reactivation_deadline': None, 'cancellation_reason': None, 'cancelled_at': None, 'submitted_at': None}]]
+INFO:     127.0.0.1:57130 - "POST /api/v1/opportunities HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1811, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1485, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/sqltypes.py", line 2792, in process
+    return json_serializer(value)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type UUID is not JSON serializable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 182, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_utils.py", line 83, in collapse_excgroups
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 184, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/main.py", line 76, in add_request_id_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 159, in call_next
+    raise app_exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 78, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/starlette/routing.py", line 75, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/fastapi/routing.py", line 302, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/fastapi/routing.py", line 213, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/api/v1/endpoints/opportunities.py", line 36, in create_opportunity
+    opportunity = service.create_opportunity(
+        title=opportunity_data.title,
+    ...<6 lines>...
+        geographic_requirements=opportunity_data.geographic_requirements.dict()
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/app/services/opportunity_service_adapter.py", line 58, in create_opportunity
+    self.db.commit()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4345, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4441, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1817, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1811, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1485, in _init_compiled
+    flattened_processors[key](compiled_params[key])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/venv/lib/python3.13/site-packages/sqlalchemy/sql/sqltypes.py", line 2792, in process
+    return json_serializer(value)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+sqlalchemy.exc.StatementError: (builtins.TypeError) Object of type UUID is not JSON serializable
+[SQL: INSERT INTO opportunities (id, title, customer_id, customer_name, sales_manager_id, description, priority, annual_recurring_revenue, geographic_requirements, status, created_at, updated_at, submitted_at, cancelled_at, cancellation_reason, reactivation_deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'description': 'This is a test opportunity to verify the API is working correctly after fixing the 404 error', 'status': 'DRAFT', 'annual_recurring_r ... (355 characters truncated) ... r_id': '123e4567-e89b-12d3-a456-426614174001', 'reactivation_deadline': None, 'cancellation_reason': None, 'cancelled_at': None, 'submitted_at': None}]]
+WARNING:  StatReload detected changes in 'app/services/opportunity_service_adapter.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [80188]
+INFO:     Started server process [80695]
+INFO:     Waiting for application startup.
+2025-07-23 15:04:20,468 - app.main - INFO - Creating database tables...
+2025-07-23 15:04:20,469 - app.main - INFO - Database tables created successfully
+INFO:     Application startup complete.
+2025-07-23 15:04:37,601 - app.main - INFO - Request c915c397-0687-45fe-9fe3-10e4e3b0f418: POST /api/v1/opportunities from 127.0.0.1
+2025-07-23 15:04:37,628 - app.main - INFO - Response c915c397-0687-45fe-9fe3-10e4e3b0f418: 201 processed in 0.027s
+INFO:     127.0.0.1:57302 - "POST /api/v1/opportunities HTTP/1.1" 201 Created
+2025-07-23 15:04:53,962 - app.main - INFO - Request 1e5c74e5-964a-4ef2-b4dc-807a109d2c6f: GET /api/v1/opportunities/97b535d2-1a8f-4d0e-9c33-cae68390c851 from 127.0.0.1
+2025-07-23 15:04:53,976 - app.main - INFO - Response 1e5c74e5-964a-4ef2-b4dc-807a109d2c6f: 200 processed in 0.013s
+INFO:     127.0.0.1:57367 - "GET /api/v1/opportunities/97b535d2-1a8f-4d0e-9c33-cae68390c851 HTTP/1.1" 200 OK
+2025-07-23 15:05:02,396 - app.main - INFO - Request c1bb6851-3e96-4804-8ce1-c82b8fb7c16d: GET /api/v1/opportunities from 127.0.0.1
+2025-07-23 15:05:02,411 - app.main - INFO - Response c1bb6851-3e96-4804-8ce1-c82b8fb7c16d: 200 processed in 0.015s
+INFO:     127.0.0.1:57405 - "GET /api/v1/opportunities?query=Test&status=DRAFT HTTP/1.1" 200 OK
+2025-07-23 15:06:05,773 - app.main - INFO - Request b8a5d016-e726-43cc-9970-3f3c0d055665: GET /api/v1/docs from 127.0.0.1
+2025-07-23 15:06:05,779 - app.main - INFO - Response b8a5d016-e726-43cc-9970-3f3c0d055665: 200 processed in 0.005s
+INFO:     127.0.0.1:57641 - "GET /api/v1/docs HTTP/1.1" 200 OK
+2025-07-23 15:06:06,294 - app.main - INFO - Request a940ad52-7085-4cdf-b9e9-2ef492269aca: GET /api/v1/openapi.json from 127.0.0.1
+2025-07-23 15:06:06,308 - app.main - INFO - Response a940ad52-7085-4cdf-b9e9-2ef492269aca: 200 processed in 0.014s
+INFO:     127.0.0.1:57641 - "GET /api/v1/openapi.json HTTP/1.1" 200 OK
