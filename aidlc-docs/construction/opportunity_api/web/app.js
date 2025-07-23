@@ -751,6 +751,21 @@ function displayOpportunityDetails(details) {
     const container = document.getElementById('opportunity-details');
     const opp = details.opportunity;
     
+    // Helper function to format skill name
+    function formatSkillName(skillName, skillType) {
+        // Check if skill_name is in the old generated format (Skill_uuid)
+        if (skillName && skillName.startsWith('Skill_') && skillName.length > 20) {
+            // Return a more user-friendly name based on skill type
+            const typeMap = {
+                'TECHNICAL': '技術技能',
+                'SOFT': '軟技能', 
+                'DOMAIN': '領域知識'
+            };
+            return typeMap[skillType] || '未指定技能';
+        }
+        return skillName || '未指定技能';
+    }
+    
     const detailsHTML = `
         <div class="row">
             <div class="col-md-6">
@@ -824,7 +839,7 @@ function displayOpportunityDetails(details) {
                         ${details.skill_requirements.map(skill => `
                             <div class="col-md-6 mb-2">
                                 <div class="border rounded p-2">
-                                    <strong>${escapeHtml(skill.skill_name)}</strong>
+                                    <strong>${escapeHtml(formatSkillName(skill.skill_name, skill.skill_type))}</strong>
                                     <br>
                                     <small>
                                         <span class="badge bg-secondary me-1">${skill.skill_type}</span>

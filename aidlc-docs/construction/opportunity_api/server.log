@@ -1,24 +1,12 @@
 INFO:     Will watch for changes in these directories: ['/Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api']
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [49023] using StatReload
-2025-07-23 18:06:34,034 - app.main - INFO - Mounted static files from: /Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/web
-INFO:     Started server process [49025]
+INFO:     Started reloader process [52065] using StatReload
+2025-07-23 18:15:25,682 - app.main - INFO - Mounted static files from: /Users/yikaikao/git/hk-ttt/aidlc-docs/construction/opportunity_api/web
+INFO:     Started server process [52068]
 INFO:     Waiting for application startup.
-2025-07-23 18:06:34,034 - app.main - INFO - Creating database tables...
-2025-07-23 18:06:34,036 - app.main - INFO - Database tables created successfully
+2025-07-23 18:15:25,682 - app.main - INFO - Creating database tables...
+2025-07-23 18:15:25,684 - app.main - INFO - Database tables created successfully
 INFO:     Application startup complete.
-2025-07-23 18:06:49,605 - app.main - INFO - Request a443806d-4560-485b-8bbe-dcbd9f269eed: POST /api/v1/opportunities from 127.0.0.1
-2025-07-23 18:06:49,620 - app.main - INFO - Response a443806d-4560-485b-8bbe-dcbd9f269eed: 201 processed in 0.015s
-INFO:     127.0.0.1:52517 - "POST /api/v1/opportunities HTTP/1.1" 201 Created
-2025-07-23 18:06:59,962 - app.main - INFO - Request db674cdc-85c1-4516-a14f-91cd193e3602: POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements from 127.0.0.1
-2025-07-23 18:06:59,982 - app.main - INFO - Response db674cdc-85c1-4516-a14f-91cd193e3602: 201 processed in 0.020s
-INFO:     127.0.0.1:52558 - "POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements HTTP/1.1" 201 Created
-2025-07-23 18:07:13,314 - app.main - INFO - Request e8adc4ff-30bb-47d3-917d-acc42a9ec5ec: POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements from 127.0.0.1
-2025-07-23 18:07:13,323 - app.main - INFO - Response e8adc4ff-30bb-47d3-917d-acc42a9ec5ec: 201 processed in 0.009s
-INFO:     127.0.0.1:52603 - "POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements HTTP/1.1" 201 Created
-2025-07-23 18:07:13,338 - app.main - INFO - Request 72a0d795-823f-4169-a28b-83e5026c4011: POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements from 127.0.0.1
-2025-07-23 18:07:13,341 - app.main - INFO - Response 72a0d795-823f-4169-a28b-83e5026c4011: 201 processed in 0.003s
-INFO:     127.0.0.1:52604 - "POST /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8/skill-requirements HTTP/1.1" 201 Created
-2025-07-23 18:07:31,053 - app.main - INFO - Request c4459211-7fa2-40a6-926c-c38719f72156: GET /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8 from 127.0.0.1
-2025-07-23 18:07:31,065 - app.main - INFO - Response c4459211-7fa2-40a6-926c-c38719f72156: 200 processed in 0.013s
-INFO:     127.0.0.1:52662 - "GET /api/v1/opportunities/796b668a-99b2-45a6-a4a3-8bf3e76583e8 HTTP/1.1" 200 OK
+2025-07-23 18:15:45,906 - app.main - INFO - Request 974ce464-26cc-4f8d-9ffa-3ef3b3db6841: GET /web from 127.0.0.1
+2025-07-23 18:15:45,910 - app.main - INFO - Response 974ce464-26cc-4f8d-9ffa-3ef3b3db6841: 200 processed in 0.003s
+INFO:     127.0.0.1:54577 - "GET /web HTTP/1.1" 200 OK
