@@ -121,6 +121,7 @@ class OpportunityServiceAdapter:
         self,
         opportunity_id: uuid.UUID,
         skill_id: uuid.UUID,
+        skill_name: str,
         skill_type: str,
         importance_level: str,
         minimum_proficiency_level: str
@@ -137,11 +138,7 @@ class OpportunityServiceAdapter:
                 "Skill requirements can only be added to opportunities in Draft status"
             )
         
-        # For simplicity, we'll use the skill_id as skill_name
-        # In a real implementation, you'd look up the skill in a skills catalog
-        skill_name = f"Skill_{skill_id}"
-        
-        # Create skill requirement
+        # Create skill requirement with the provided skill_name
         skill_requirement = SkillRequirement(
             opportunity_id=str(opportunity_id),
             skill_id=str(skill_id),

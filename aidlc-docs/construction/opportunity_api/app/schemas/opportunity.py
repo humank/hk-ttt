@@ -126,6 +126,7 @@ class ProficiencyLevel(str, Enum):
 class SkillRequirementCreateRequest(BaseModel):
     """Request schema for creating a skill requirement."""
     skill_id: uuid.UUID = Field(..., description="Skill ID from skills catalog")
+    skill_name: str = Field(..., min_length=1, max_length=100, description="Name of the skill")
     skill_type: SkillType = Field(..., description="Type of skill")
     importance_level: ImportanceLevel = Field(..., description="Importance level")
     minimum_proficiency_level: ProficiencyLevel = Field(..., description="Minimum proficiency level")

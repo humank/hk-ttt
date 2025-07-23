@@ -1,14 +1,26 @@
-fastapi==0.115.6
-uvicorn[standard]==0.32.1
-pydantic==2.10.4
-sqlalchemy==2.0.36
-alembic==1.14.0
-python-multipart==0.0.20
-python-jose[cryptography]==3.3.0
+# Core FastAPI and web framework
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+pydantic==2.11.7
+pydantic-settings==2.10.1
+
+# Database
+sqlalchemy==2.0.41
+alembic==1.16.4
+
+# Security and authentication
+python-jose[cryptography]==3.5.0
 passlib[bcrypt]==1.7.4
-slowapi==0.1.9
+
+# HTTP and file handling
+python-multipart==0.0.20
 aiofiles==24.1.0
-pytest==8.3.4
-pytest-asyncio==0.24.0
 httpx==0.28.1
-python-dotenv==1.0.1
+
+# Rate limiting and utilities
+slowapi==0.1.9
+python-dotenv==1.1.1
+
+# Testing
+pytest==8.4.1
+pytest-asyncio==1.1.0

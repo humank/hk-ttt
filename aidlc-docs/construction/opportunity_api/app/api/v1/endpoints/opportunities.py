@@ -212,6 +212,7 @@ async def add_skill_requirement(
     skill_requirement = service.add_skill_requirement(
         opportunity_id=opportunity_id,
         skill_id=skill_data.skill_id,
+        skill_name=skill_data.skill_name,
         skill_type=skill_data.skill_type.value,
         importance_level=skill_data.importance_level.value,
         minimum_proficiency_level=skill_data.minimum_proficiency_level.value

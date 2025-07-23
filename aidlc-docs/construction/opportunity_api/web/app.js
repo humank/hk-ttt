@@ -560,6 +560,7 @@ async function handleCreateOpportunity(event) {
             const skillName = skillElement.querySelector('input[name*="[name]"]').value;
             const skillData = {
                 skill_id: generateUUID(),
+                skill_name: skillName, // 添加 skill_name 字段
                 skill_type: skillElement.querySelector('input[name*="[type]"]').value,
                 importance_level: skillElement.querySelector('input[name*="[importance]"]').value,
                 minimum_proficiency_level: skillElement.querySelector('input[name*="[proficiency]"]').value
