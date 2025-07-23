@@ -22,21 +22,31 @@ Plan for the work ahead and write your steps in the iaidlc-docs/nception/units/u
 Your Task: Refer to the user stories in the aidlc-docs/inception/comprehensive_user_stories.md folder.
 
 
+### Shared Data Models
+
+Your Role: You are an experienced software architect. You are tasked with creating the component model.
+
+Plan for the work ahead and write your steps in the aidlc-docs/inception/units/dependencies_integration_summary.md file with checkboxes for each step in the plan. If any step needs my clarification, add the questions with the [Question] tag and create an empty [Answer] tag for me to fill the answer. Do not make any assumptions or decisions on your own. Upon creating the plan, ask for my review and approval. After my approval, you can go ahead to execute the same plan one step at a time. Once you finish each step, mark the checkboxes as completed in the plan.
+
+Your Task: Refer to the Shared Data Models section in aidlc-docs/inception/dependencies_integration_summary.md folder. Create the component model for each of the core entities with their attributes. Refer to aidlc-docs/inception/comprehensive_user_stories.md for additional context. Save the output in aidlc-docs/nception/units/shared_model.md
+
+
+
 ## Construction
 
 ### Domain Modelling
 
-Your Role: You are an experienced software engineer. You are tasked with designing the Domain Model to implement all the user stories as referred in the Task section. This model shall contain all the components, the attributes, the behaviours and how the components interact to implement business logic in the user stories. Do not generate any architectural components. Do not generate any codes. Write the component model into a separate md file in the aidlc-docs/construction folder. We will use Amazon Bedrock API for the AI capabilities. Don't create any AI functionality from the scratch.
+Your Role: You are an experienced software engineer. You are tasked with designing the Domain Model to implement all the user stories as referred in the Task section. This model shall contain all the components, the attributes, the behaviours and how the components interact to implement business logic in the user stories. Do not generate any architectural components. Do not generate any codes. Strictly refer and copy the full definition of relevant shared components needed as present in the aidlc-docs/inception/units/shared_model.md. Write the component model into a separate md file in the aidlc-docs/construction folder.
 
 Plan for the work ahead and write your steps in the aidlc-docs/construction/domain_model_plan.md file with checkboxes for each step in the plan. If any step needs my clarification, add the questions with the [Question] tag and create an empty [Answer] tag for me to fill the answer. Do not make any assumptions or decisions on your own. Upon creating the plan, ask for my review and approval. After my approval, you can go ahead to execute the same plan one step at a time. Once you finish each step, mark the checkboxes as completed in the plan.
 
-Your Task: Refer to the user stories in the /Users/yikaikao/git/hk-ttt/aidlc-docs/inception/units/opportunity_management_service.md
+Your Task: Refer to the user stories in the aidlc-docs/inception/units/matching_engine_service.md
 
 ### Dmain Model to Code
 
-Your Role: You are an experienced software engineer. Your task is as mentioned in the Task section below. Plan for the work ahead and write your steps in the aidlc-docs/construction/domain_model_plan.md file with checkboxes for each step in the plan. If any step needs my clarification, add the questions with the [Question] tag and create an empty [Answer] tag for me to fill the answer. Do not make any assumptions or decisions on your own. Upon creating the plan, ask for my review and approval. After my approval, you can go ahead to execute the same plan one step at a time. Once you finish each step, mark the checkboxes as completed in the plan.
+Your Role: You are an experienced software engineer. Your task is as mentioned in the Task section below. Plan for the work ahead and write your steps in the aidlc-docs/construction/domain_code_plan.md file with checkboxes for each step in the plan. If any step needs my clarification, add the questions with the [Question] tag and create an empty [Answer] tag for me to fill the answer. Do not make any assumptions or decisions on your own. Upon creating the plan, ask for my review and approval. After my approval, you can go ahead to execute the same plan one step at a time. Once you finish each step, mark the checkboxes as completed in the plan.
 
-Task: Refer to aidlc-docs/construction/domain_model_plan.md file. Generate a very simple and intuitive Python implementation for the components in the domain model. Keep the directory structure flat. Reuse standard python components available for loggic and other utulities. Assume the repositories are in-memory. Generate the classes in respective individual files.
+Task: Refer to aidlc-docs/construction/domain_model.md file. Generate a very simple and intuitive Python implementation for the components in the domain model. Keep the directory structure flat. Reuse standard python components available for loggic and other utulities. Assume the repositories are in-memory. Generate the classes in respective individual files.
 
 
 ### Adding Architectural Components

@@ -80,18 +80,6 @@ This service contains the core matching algorithm that matches customer opportun
 - Sales Manager can compare multiple recommendations side by side
 - System provides visual indicators for exceptionally good matches (e.g., >90% match)
 
-### US-MA-6: Match Details Visualization
-**As a** Sales Manager,  
-**I want to** view detailed information about why a Solution Architect was matched with an opportunity,  
-**So that** I can make an informed selection decision.
-
-**Acceptance Criteria:**
-- Sales Manager can view a detailed breakdown of the match score
-- System displays which required skills were matched and at what proficiency level
-- System highlights any required skills that weren't matched
-- System shows availability confirmation for the required timeline
-- System provides language and geographic match details
-- Sales Manager can access the Solution Architect's full profile from the match details
 
 ## Key Capabilities
 - **Advanced Matching Algorithm**: Multi-factor matching with configurable weights
